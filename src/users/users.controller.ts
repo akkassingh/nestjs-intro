@@ -10,7 +10,7 @@ import {
 
 @Controller('users')
 export class UsersController {
-  @Get('/{:id}')
+  @Get('/{:id}') // making parameter optional by adding {}
   public getUsers(
     @Param('id', ParseIntPipe) id: number | undefined,
     @Query('limit') limit: any,
