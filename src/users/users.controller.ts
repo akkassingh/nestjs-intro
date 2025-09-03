@@ -6,6 +6,7 @@ import {
   Post,
   Body,
   ParseIntPipe,
+  DefaultValuePipe,
 } from '@nestjs/common';
 
 @Controller('users')
@@ -13,11 +14,15 @@ export class UsersController {
   @Get('/{:id}') // making parameter optional by adding {}
   public getUsers(
     @Param('id', ParseIntPipe) id: number | undefined,
-    @Query('limit') limit: any,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe)
+    limit: number | undefined,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe)
+    page: number | undefined,
   ) {
-    console.log(typeof id);
     console.log(id);
-    return `you sent a get request to users with id: ${id} and limit: ${limit}`;
+    console.log(limit);
+    console.log(page);
+    return `you sent a get request to users with id: ${id} and limit: ${limit} and page: ${page}`;
   }
   @Post()
   public createUser(@Body() request: any) {
