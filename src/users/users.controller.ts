@@ -27,7 +27,7 @@ export class UsersController {
     return `you sent a get request to users with id: ${id} and limit: ${limit} and page: ${page}`;
   }
   @Post()
-  public createUser(@Body(new ValidationPipe()) CreateUserDto: CreateUserDto){
+  public createUser(@Body() CreateUserDto: CreateUserDto){
     console.log(CreateUserDto);
     return `User created successfully ${JSON.stringify(CreateUserDto)}`;
   }
